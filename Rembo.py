@@ -15,7 +15,7 @@
 
 
 import tkinter as tk
-from tkinter import filedialog, messagebox, scrolledtext
+from tkinter import filedialog, messagebox, scrolledtext, ttk
 import pandas as pd
 
 import prc_ui as pu
@@ -49,56 +49,6 @@ def main_ui():
     def on_mousewheel(event):
         canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
-    root = tk.Tk()
-    root.title("Slot Reminder")
-    root.geometry("750x450")
-    root.configure(bg="#f0f0f0")
-    root.iconbitmap("icon.ico")
-
-    root.protocol("WM_DELETE_WINDOW", on_closing)  # Handle the window close event
-    root.grid_rowconfigure(0, weight=1)
-    root.grid_columnconfigure(0, weight=1)
-
-    # Create a Canvas and place it with grid
-    canvas = tk.Canvas(root, bg="#f0f0f0", highlightthickness=0)
-    canvas.grid(row=0, column=0, sticky="nsew")
-
-    # Create a Scrollbar and place it with grid
-    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
-    scrollbar.grid(row=0, column=1, sticky="ns")
-
-    # Configure the Canvas to work with the Scrollbar
-    canvas.configure(yscrollcommand=scrollbar.set)
-    canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-
-    # Create a Frame inside the Canvas
-    scrollable_frame = tk.Frame(canvas, bg="#f0f0f0")
-    scrollable_frame.bind(
-        "<Configure>",
-        lambda e: canvas.configure(
-            scrollregion=canvas.bbox("all")
-        )
-    )
-
-    # Add the Frame to the Canvas
-    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-
-    canvas.bind_all("<MouseWheel>", on_mousewheel)
-
-    # Ensure the scrollable_frame takes up all available space
-    scrollable_frame.grid_rowconfigure(0, weight=1)
-    scrollable_frame.grid_columnconfigure(0, weight=1)
-
-
-    center_frame = tk.Frame(scrollable_frame, bg="#f0f0f0")
-    center_frame.grid(row=0, column=0, padx=20, pady=20)
-
-    title_label = tk.Label(center_frame, text="Reminder Bot", font=("Helvetica", 32, "bold"), bg="#f0f0f0", fg="#333")
-    title_label.pack(pady=20)
-
-    sub_label = tk.Label(center_frame, text="This is an automated messaging service.", font=("Helvetica", 12), bg="#f0f0f0", fg="#666")
-    sub_label.pack(pady=10,padx=5)
-
     txt = """   NOTE:
     - Make sure all the phone numbers have total of 12 digits and does not contain '+'.
     - After you click 'Send' in the Message Processing window, do not move your mouse or press any 
@@ -108,32 +58,74 @@ def main_ui():
     - The Excel file given as input should not contain any headers.
     - Make sure the Excel file is not open in any other application.
     - Please do contact the Developer if any issue arises."""
-    message_label = tk.Label(center_frame, text=txt,anchor="nw",justify="left", font=("Helvetica", 12), bg="#f0f0f0", fg="#666")
-    message_label.pack(pady=10)
 
-    file_frame = tk.Frame(center_frame, bg="#f0f0f0")
-    file_frame.pack(pady=10)
+    root = tk.Tk()
+    root.title("Slot Reminder")
+    # root.geometry("750x450")
+    root.state('zoomed')
+    root.configure(bg="#f0f0f0")
 
-    file_label = tk.Label(file_frame, text="File:", font=("Helvetica", 12), bg="#f0f0f0", fg="#333")
-    file_label.pack(side=tk.LEFT, padx=5)
+    root.protocol("WM_DELETE_WINDOW", on_closing)  # Handle the window close event
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_columnconfigure(0, weight=1)
 
-    file_entry = tk.Entry(file_frame, width=40, font=("Helvetica", 12), bd=2, relief="groove")
-    file_entry.pack(side=tk.LEFT, padx=5)
+    # Create a Canvas and place it with grid
+    canvas = tk.Canvas(root, bg="#f0f0f0", highlightthickness=0)
+    canvas.grid(row=0, column=0,sticky="nsew")
+    canvas.grid_rowconfigure(1,weight=1) 
+    canvas.grid_columnconfigure(1,weight=1) 
 
-    browse_button = tk.Button(file_frame, text="Browse", font=("Helvetica", 12), command=browse_files, bg="#4CAF50", fg="white", bd=0, padx=10, pady=5)
-    browse_button.pack(side=tk.LEFT, padx=5)
+    # Create a Scrollbar and place it with grid
+    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
+    scrollbar.grid(row=0, column=1, sticky="nsew")
 
-    input_frame = tk.Frame(center_frame, bg="#f0f0f0")
-    input_frame.pack(pady=10)
-    
-    msg_label = tk.Label(input_frame, text="Enter the Message", font=("Helvetica", 12), bg="#f0f0f0", fg="#333")
-    msg_label.pack(side=tk.LEFT,padx=5)
+    # Configure the Canvas to work with the Scrollbar
+    canvas.configure(yscrollcommand=scrollbar.set)
 
-    msg_entry = scrolledtext.ScrolledText(input_frame, width=30, font=("Helvetica", 12), bd=2, relief="groove")
-    msg_entry.pack(side=tk.LEFT,padx=5)
+    # Create a Frame inside the Canvas
+    scrollable_frame = ttk.Frame(canvas, style="TFrame")
 
-    submit_button = tk.Button(center_frame, text="Submit", font=("Helvetica", 12, "bold"), command=submit_form, bg="#008CBA", fg="white", bd=0, padx=20, pady=10)
-    submit_button.pack(pady=20)
+    # Define a function to configure the scrollable area
+    def on_frame_configure(event):
+        canvas.configure(scrollregion=canvas.bbox("all"))
+
+    # Bind the function to the scrollable_frame size change event
+    scrollable_frame.bind("<Configure>", on_frame_configure)
+
+    # Add the Frame to the Canvas
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+    canvas.bind_all("<MouseWheel>", on_mousewheel)
+
+    # Add widgets to the scrollable_frame using grid layout
+    title_label = tk.Label(scrollable_frame, text="Reminder Bot", font=("Helvetica", 32, "bold"),anchor="center",
+                            bg="#f0f0f0", fg="#333")
+    title_label.grid(row=0, column=1, columnspan=2, pady=10, padx=10)
+
+    sub_label = tk.Label(scrollable_frame, text="This is an automated messaging service.", font=("Helvetica", 12), bg="#f0f0f0", fg="#666")
+    sub_label.grid(row=1, column=1, columnspan=2, pady=10, padx=10)
+
+    message_label = tk.Label(scrollable_frame, text=txt, anchor="center", justify="left", font=("Helvetica", 12), bg="#f0f0f0", fg="#666")
+    message_label.grid(row=2, column=0, columnspan=2, pady=10, padx=10)
+
+    file_label = tk.Label(scrollable_frame, text="File:", font=("Helvetica", 12), bg="#f0f0f0", fg="#333")
+    file_label.grid(row=3, column=0, pady=10, padx=10, sticky="e")
+
+    file_entry = tk.Entry(scrollable_frame, width=40, font=("Helvetica", 12), bd=2, relief="groove")
+    file_entry.grid(row=3, column=1, pady=10, padx=10, sticky="ew")
+
+    browse_button = tk.Button(scrollable_frame, text="Browse", font=("Helvetica", 12), command=browse_files, bg="#4CAF50", fg="white", bd=0, padx=10, pady=5)
+    browse_button.grid(row=3, column=2, pady=10, padx=10, sticky="w")
+
+    msg_label = tk.Label(scrollable_frame, text="Enter the Message:", font=("Helvetica", 12), bg="#f0f0f0", fg="#333")
+    msg_label.grid(row=4, column=0, pady=10, padx=10, sticky="ne")
+
+    msg_entry = scrolledtext.ScrolledText(scrollable_frame, width=60, height=10, font=("Helvetica", 12), bd=2, relief="groove")
+    msg_entry.grid(row=4, column=1, columnspan=2, pady=10, padx=10, sticky="e")
+
+    submit_button = tk.Button(scrollable_frame, text="Submit", font=("Helvetica", 12, "bold"), command=submit_form, 
+                              bg="#008CBA", fg="white", bd=0, padx=20, pady=10, anchor="center")
+    submit_button.grid(row=5, column=1, pady=10, padx=10)
 
     root.mainloop()
 
