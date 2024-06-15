@@ -72,12 +72,10 @@ def main_ui():
     # Create a Canvas and place it with grid
     canvas = tk.Canvas(root, bg="#f0f0f0", highlightthickness=0)
     canvas.grid(row=0, column=0,sticky="nsew")
-    canvas.grid_rowconfigure(0,weight=1) 
-    canvas.grid_columnconfigure(0,weight=1) 
 
     # Create a Scrollbar and place it with grid
     scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
-    scrollbar.grid(row=0, column=1, sticky="ns")
+    # scrollbar.grid(row=0, column=1, sticky="ns")
 
     # Configure the Canvas to work with the Scrollbar
     canvas.configure(yscrollcommand=scrollbar.set)
@@ -96,21 +94,23 @@ def main_ui():
 
     canvas.bind_all("<MouseWheel>", on_mousewheel)
 
+    scrollable_frame.grid_columnconfigure(0, weight=1)
+
     # Add widgets to the scrollable_frame using grid layout
     title_label = tk.Label(scrollable_frame, text="Reminder Bot", font=("Helvetica", 32, "bold"),anchor="center",
                             bg="#f0f0f0", fg="#333")
-    title_label.grid(row=0, column=1, columnspan=2, pady=10, padx=10)
+    title_label.grid(row=0, column=1, columnspan=2, pady=10, padx=10,sticky="ew")
 
     sub_label = tk.Label(scrollable_frame, text="This is an automated messaging service.", font=("Helvetica", 12), bg="#f0f0f0", fg="#666")
-    sub_label.grid(row=1, column=1, columnspan=2, pady=10, padx=10)
+    sub_label.grid(row=1, column=1, columnspan=2, pady=10, padx=10 ,sticky="ew")
 
     message_label = tk.Label(scrollable_frame, text=txt, anchor="center", justify="left", font=("Helvetica", 12), bg="#f0f0f0", fg="#666")
-    message_label.grid(row=2, column=0, columnspan=2, pady=10, padx=10)
+    message_label.grid(row=2, column=0, columnspan=2, pady=10, padx=10, sticky="ew")
 
     file_label = tk.Label(scrollable_frame, text="File:", font=("Helvetica", 12), bg="#f0f0f0", fg="#333")
     file_label.grid(row=3, column=0, pady=10, padx=10, sticky="e")
 
-    file_entry = tk.Entry(scrollable_frame, width=40, font=("Helvetica", 12), bd=2, relief="groove")
+    file_entry = tk.Entry(scrollable_frame, font=("Helvetica", 12), bd=2, relief="groove")
     file_entry.grid(row=3, column=1, pady=10, padx=10, sticky="ew")
 
     browse_button = tk.Button(scrollable_frame, text="Browse", font=("Helvetica", 12), command=browse_files, bg="#4CAF50", fg="white", bd=0, padx=10, pady=5)
@@ -127,7 +127,8 @@ def main_ui():
     submit_button.grid(row=5, column=1, pady=10, padx=10)
 
 
-
+    scrollable_frame.grid_columnconfigure(1, weight=1)
+    scrollable_frame.grid_columnconfigure(2, weight=1)
 
 
 
