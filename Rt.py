@@ -61,7 +61,7 @@ def main_ui():
 
     root = tk.Tk()
     root.title("Slot Reminder")
-    root.geometry("750x450")
+    root.geometry("750x550")
     # root.state('zoomed')
     root.configure(bg="#f0f0f0")
 
