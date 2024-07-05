@@ -14,19 +14,22 @@ root.geometry("750x550")
 root.minsize(300,200)
 root.title("Slot Reminder")
 
-f21 = tk.Frame(root)
 
-canvas = tk.Canvas(f21, bg="#f0f0f0", highlightthickness=0)
-scrollbar = tk.Scrollbar(f21, orient="vertical", command=canvas.yview)
+f1 = tk.Frame(root)
+f2 = tk.Frame(root)
+
+
+
+canvas = tk.Canvas(f2, bg="#f0f0f0", highlightthickness=0)
+scrollbar = tk.Scrollbar(f2, orient="vertical", command=canvas.yview)
 scrollable_frame = ttk.Frame(canvas,style="TFrame" )
 scrollable_frame.bind("<Configure>", on_frame_configure)
+
+f21 = tk.Frame(scrollable_frame)
 
 canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 canvas.bind_all("<MouseWheel>", on_mousewheel)
 
-
-f1 = tk.Frame(root)
-f2 = tk.Frame(scrollable_frame)
 
 lab1 = tk.Label(f1, text="Reminder Bot", font=("Helvetica", 32, "bold"),anchor="center",
                             bg="#f0f0f0", fg="#333")
@@ -45,19 +48,20 @@ lab3.pack(fill='x')
 text1.pack(fill='both',expand=True)
 btn1.pack(fill='x')
 
-lab4 = tk.Label(f2,text="label4")
-text2 = tk.Text(f2,width=20,height=10)
-btn2 = tk.Button(f2,height=40,text="button2")
+lab4 = tk.Label(f21,text="label4")
+text2 = tk.Text(f21,width=20,height=10)
+btn2 = tk.Button(f21,height=40,text="button2")
 
-lab4.pack()
-text2.pack()
-btn2.pack()
+lab4.pack(fill='x')
+text2.pack(fill='both',expand=True)
+btn2.pack(fill='x')
 
 canvas.pack(fill='both',expand=True)
 scrollable_frame.pack(fill='both',expand=True)
+f21.pack(side=tk.TOP,fill='x')
 
 f1.pack(side=tk.TOP,fill='both',expand=True)
 f2.pack(side=tk.TOP,fill='both',expand=True)
-f21.pack(side=tk.TOP,fill='both',expand=True)
+
 
 root.mainloop()
