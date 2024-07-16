@@ -17,6 +17,8 @@ root.title("Slot Reminder")
 
 f1 = tk.Frame(root)
 f2 = tk.Frame(root)
+t2 = tk.Frame(root)
+p2 = tk.Frame(root)
 
 
 
