@@ -26,6 +26,7 @@ root.title("Slot Reminder")
 
 f1 = tk.Frame(root)
 f2 = tk.Frame(root)
+f3 = tk.Frame(root)
 
 canvas = tk.Canvas(f2, bg="#f0f0f0", highlightthickness=0)
 scrollbar = tk.Scrollbar(f2, orient="vertical", command=canvas.yview)
@@ -40,7 +41,7 @@ canvas.bind_all("<MouseWheel>", on_mousewheel)
 
 title = tk.Label(f1, text="Reminder Bot", font=("Helvetica", 32, "bold"),anchor="center",
                             bg="#f0f0f0", fg="#333")
-instr = tk.Label(f1,text="txt")
+instr = tk.Label(f2,text="txt")
 ent2 = tk.Entry(f1)
 lab3 = tk.Label(f1, text="label3")
 text1 = tk.Text(f1, width=20, height=5)
