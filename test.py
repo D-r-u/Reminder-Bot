@@ -8,6 +8,15 @@ def on_mousewheel(event):
 def on_frame_configure(event):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
+txt = """   NOTE:
+    - Make sure all the phone numbers have total of 12 digits and does not contain '+'.
+    - After you click 'Send' in the Message Processing window, do not move your mouse or press any 
+        keys on your keyboard.
+    - A maximum of 100 bulk messaging is only allowed in a day.
+    - Confirm that you have logged in on the intended Account in your default browser.
+    - The Excel file given as input should not contain any headers.
+    - Make sure the Excel file is not open in any other application.
+    - Please do contact the Developer if any issue arises."""
 
 root = tk.Tk()
 root.geometry("750x550")
@@ -17,9 +26,6 @@ root.title("Slot Reminder")
 
 f1 = tk.Frame(root)
 f2 = tk.Frame(root)
-
-
-
 
 canvas = tk.Canvas(f2, bg="#f0f0f0", highlightthickness=0)
 scrollbar = tk.Scrollbar(f2, orient="vertical", command=canvas.yview)
@@ -32,18 +38,16 @@ canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 canvas.bind_all("<MouseWheel>", on_mousewheel)
 
 
-lab1 = tk.Label(f1, text="Reminder Bot", font=("Helvetica", 32, "bold"),anchor="center",
+title = tk.Label(f1, text="Reminder Bot", font=("Helvetica", 32, "bold"),anchor="center",
                             bg="#f0f0f0", fg="#333")
-ent1 = tk.Entry(f1)
-lab2 = tk.Label(f1,text="label2")
+instr = tk.Label(f1,text="txt")
 ent2 = tk.Entry(f1)
 lab3 = tk.Label(f1, text="label3")
 text1 = tk.Text(f1, width=20, height=5)
 btn1 = tk.Button(f1,text="button1")
 
-lab1.pack(fill='x')
-ent1.pack(fill='x')
-lab2.pack(fill='x')
+title.pack(fill='x')
+instr.pack(fill='x')
 ent2.pack(fill='x')
 lab3.pack(fill='x')
 text1.pack(fill='both',expand=True)
