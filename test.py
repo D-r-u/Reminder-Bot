@@ -17,6 +17,7 @@ txt = """   NOTE:
     - The Excel file given as input should not contain any headers.
     - Make sure the Excel file is not open in any other application.
     - Please do contact the Developer if any issue arises."""
+sub = "This is an automated messaging service.\n Takes .xlsx files and the message to be sent."
 
 root = tk.Tk()
 root.geometry("750x550")
@@ -41,15 +42,25 @@ canvas.bind_all("<MouseWheel>", on_mousewheel)
 
 title = tk.Label(f1, text="Reminder Bot", font=("Helvetica", 32, "bold"),anchor="center",
                             bg="#f0f0f0", fg="#333")
+sub_title = tk.Label(f1, text=sub,font=("Helvetica", 12), bg="#f0f0f0", fg="#666")
+
+title.pack(fill='x')
+sub_title.pack(fill='x')
+
 instr = tk.Label(f2,text="txt")
-ent2 = tk.Entry(f1)
+
+instr.pack(fill='x')
+
+f31 = tk.Frame(f3)
+f32 = tk.Frame(f3)
+f33 = tk.Frame(f3)
+
+file_label = tk.Label(f31, text="File:", font=("Helvetica", 12), bg="#f0f0f0", fg="#333")
 lab3 = tk.Label(f1, text="label3")
 text1 = tk.Text(f1, width=20, height=5)
 btn1 = tk.Button(f1,text="button1")
 
-title.pack(fill='x')
-instr.pack(fill='x')
-ent2.pack(fill='x')
+file_label.pack(side=tk.LEFT,fill='x')
 lab3.pack(fill='x')
 text1.pack(fill='both',expand=True)
 btn1.pack(fill='x')
