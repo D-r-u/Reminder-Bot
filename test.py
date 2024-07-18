@@ -79,6 +79,8 @@ f21.pack(side=tk.TOP,fill='x')
 
 f1.pack(side=tk.TOP,fill='both',expand=True)
 f2.pack(side=tk.TOP,fill='both',expand=True)
+f3.pack(side=tk.TOP,fill='both',expand=True)
+
 
 
 root.mainloop()
