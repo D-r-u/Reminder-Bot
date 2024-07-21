@@ -75,7 +75,10 @@ btn2.pack(fill='x')
 
 canvas.pack(fill='both',expand=True)
 scrollable_frame.pack(fill='both',expand=True)
-f21.pack(side=tk.TOP,fill='x')
+
+f31.pack(side=tk.TOP,fill='x')
+f32.pack(side=tk.TOP,fill='x')
+f33.pack(side=tk.TOP,fill='x')
 
 f1.pack(side=tk.TOP,fill='both',expand=True)
 f2.pack(side=tk.TOP,fill='both',expand=True)
