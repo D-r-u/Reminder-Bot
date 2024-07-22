@@ -57,13 +57,9 @@ f33 = tk.Frame(f3)
 
 file_label = tk.Label(f31, text="File:", font=("Helvetica", 12), bg="#f0f0f0", fg="#333")
 lab3 = tk.Label(f1, text="label3")
-text1 = tk.Text(f1, width=20, height=5)
-btn1 = tk.Button(f1,text="button1")
 
 file_label.pack(side=tk.LEFT,fill='x')
 lab3.pack(fill='x')
-text1.pack(fill='both',expand=True)
-btn1.pack(fill='x')
 
 lab4 = tk.Label(f21,text="label4")
 text2 = tk.Text(f21,width=20,height=10)
